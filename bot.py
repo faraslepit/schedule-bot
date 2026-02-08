@@ -1,7 +1,26 @@
 import os
 import datetime
 import telebot
+import threading
+import http.server
+import socketserver
 from telebot import types
+
+PORT = int(os.environ.get("PORT", 8000))
+
+class HealthHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain")
+        self.end_headers()
+        self.wfile.write(b"OK")
+
+def run_health_server():
+    with socketserver.TCPServer(("", PORT), HealthHandler) as httpd:
+        print(f"Health server running on port {PORT}")
+        httpd.serve_forever()
+
+threading.Thread(target=run_health_server, daemon=True).start()
 
 START_DATE = datetime.date(2026, 1, 12)
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -121,4 +140,5 @@ def handle_text(message):
         bot.send_message(message.from_user.id, "Не понял команду. Нажми на кнопку!")
 
 if __name__ == "__main__":
+
     bot.polling(none_stop=True)
