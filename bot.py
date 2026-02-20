@@ -25,7 +25,6 @@ threading.Thread(target=run_health_server, daemon=True).start()
 
 START_DATE = datetime.date(2026, 1, 12)
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-photo_url = "https://postimg.cc/CBhb0xRq"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 SCHEDULE_1 = {
@@ -283,7 +282,7 @@ def handle_text(message):
     elif text == "Рандомайзер":
         bot.send_message(message.from_user.id, f"🎲 Кинул кубик: {random.randint(1, 21)}")
     elif text == "Полное расписание":
-        bot.send_message(message.from_user.id, photo_url)
+        bot.send_message(message.from_user.id, "https://postimg.cc/CBhb0xRq")
     else:
         bot.send_message(message.from_user.id, "Не понял команду. Нажми на кнопку!")
 
@@ -291,6 +290,7 @@ def handle_text(message):
 if __name__ == "__main__":
 
     bot.polling(none_stop=True)
+
 
 
 
