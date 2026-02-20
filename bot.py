@@ -282,7 +282,7 @@ def handle_text(message):
     elif text == "Рандомайзер":
         bot.send_message(message.from_user.id, f"🎲 Кинул кубик: {random.randint(1, 21)}")
     elif text == "Полное расписание":
-        bot.send_message(message.from_user.id, "AgACAgIAAxkBAAIBcGmYYzLeJbbEuEjhH7MFM94I7v2eAAJUFmsb-XXASN_4g_252eNyAQADAgADeQADOgQ")
+        bot.send_photo(message.from_user.id, "AgACAgIAAxkBAAIBcGmYYzLeJbbEuEjhH7MFM94I7v2eAAJUFmsb-XXASN_4g_252eNyAQADAgADeQADOgQ")
     else:
         bot.send_message(message.from_user.id, "Не понял команду. Нажми на кнопку!")
 
@@ -290,6 +290,7 @@ def handle_text(message):
 if __name__ == "__main__":
 
     bot.polling(none_stop=True)
+
 
 
 
